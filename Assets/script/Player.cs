@@ -19,6 +19,13 @@ public class Player : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v);
 
+        if (dir.magnitude > 0.1f)
+        {
+            float faceAngle = Mathf.Atan2(h, v) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, faceAngle, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.3f);
+        }
+
         cc.Move(dir * 5f * Time.deltaTime);
     }
 }
